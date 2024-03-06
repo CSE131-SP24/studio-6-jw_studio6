@@ -3,6 +3,7 @@ package studio6;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class RecursiveMethods {
+	
 
 	/**
 	 * Computes the geometric sum for the first n terms in the series
@@ -12,11 +13,16 @@ public class RecursiveMethods {
 	 *         ...)
 	 */
 	public static double geometricSum(int n) {
-		
-			// FIXME compute the geometric sum for the first n terms recursively
+		if (n==0) {
 			return 0;
+		}
+		else {
+			return Math.pow(0.5, n) + geometricSum(n-1);
+		}
+			// FIXME compute the geometric sum for the first n terms recursively
 		
 	}
+	//geometricSum(n) = Math.pow(1/2, n) + geometricSum(n-1)
 
 	/**
 	 * This method uses recursion to compute the greatest common divisor
@@ -27,7 +33,6 @@ public class RecursiveMethods {
 	 * @return greatest common divisor of p and q
 	 */
 	public static int gcd(int p, int q) {
-		
 			// FIXME compute the gcd of p and q using recursion
 			return 0;
 		
@@ -61,6 +66,24 @@ public class RecursiveMethods {
 			double radiusMinimumDrawingThreshold) {
 		
 		// FIXME
+		if (radius < radiusMinimumDrawingThreshold) {
+			return;
+		}
+		else {
+			StdDraw.circle(xCenter, yCenter, radius);
+			if(radius < radiusMinimumDrawingThreshold) {
+				StdDraw.circle(xCenter - radius, yCenter, radius/3.0);
+				StdDraw.circle(xCenter + radius, yCenter, radius/3.0);
+				StdDraw.circle(xCenter, yCenter - radius, radius/3.0);
+				StdDraw.circle(xCenter, yCenter + radius, radius/3.0);
+			}
+			
+			circlesUponCircles(xCenter, yCenter-radius, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter +radius, yCenter, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter, yCenter+radius, radius/3.0, radiusMinimumDrawingThreshold);
+			circlesUponCircles(xCenter -radius, yCenter, radius/3.0, radiusMinimumDrawingThreshold);
+		}
+		
 	}
 
 }
